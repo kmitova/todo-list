@@ -1,0 +1,32 @@
+main {
+  display: grid;
+  gap: 1em;
+  grid-template-columns: repeat(auto-fit,
+    minmax(400px, 1fr));
+}
+
+.side {
+  border-right: 2px solid black;
+}
+
+label {
+  display: block;
+}
+
+input {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+li {
+  list-style: none;
+  cursor: pointer;
+  padding: 1em;
+}
+
+button {
+  margin: 0 .5em;
+}
