@@ -13,29 +13,30 @@
       <div class="side">
         <div class="projects">
           <h3>Your projects:</h3>
-          <ul>
-            <li>Example Project 1</li>
-            <li>Example Project 2</li>
+          <ul id="projects-list">
+            <!-- <li>Example Project</li>
+            <li>Example Project 2</li> -->
           </ul>
         </div>
         <div class="add-new-project">
           <!-- when the button is clicked, display form and hide button -->
-          <button class="add-project-btn">Add New Project</button>
+          <button id="add-project-btn">Add New Project</button>
           <form action="">
             <label for="">Title</label>
-            <input type="text" />
-            <label for="">Description</label>
-            <textarea name="" id="" cols="30" rows="10"></textarea>
+            <input type="text" id="project-title" />
+            <!-- <label for="">Description</label>
+            <textarea name="" id="" cols="30" rows="10" id="project-description"></textarea> -->
             <label for="">Due Date</label>
-            <input type="date" />
+            <input type="date" id="project-due-date" />
             <!-- when this button is clicked, create project (add to list, hide form and display add project button -->
-            <div class="project-buttons">
-              <button type="submit" class="create-new-project">
+            
+            </div>
+          </form>
+          <div class="project-buttons">
+              <button id="create-new-project">
                 Create Project
               </button>
               <button class="cancel">Cancel</button>
-            </div>
-          </form>
         </div>
       </div>
       <div class="content">
@@ -56,9 +57,9 @@
           <form action="">
             <input type="text" placeholder="write task here" />
             <!-- if clicked, add task to project, hide form, display the add task button again -->
-            <button type="submit" class="add-new-task-form-btn">Add</button>
-            <button class="cancel">Cancel</button>
           </form>
+          <button class="add-new-task-form-btn">Add</button>
+            <button class="cancel">Cancel</button>
         </div>
       </div>
     </main>
