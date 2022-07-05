@@ -1,5 +1,3 @@
-// projects do not display on the right if another is added
-
 let myProjects = []
 projectInputAvailable = false
 let getProjectTitle 
@@ -12,6 +10,11 @@ const addProjectBtn = document.getElementById("add-project-btn");
 const createProjectBtn = document.getElementById("create-new-project");
 let newProject
 let availableProjects;
+
+// GET CONSTANTS FROM DOM
+const upperPart = document.getElementById('upper-part')
+const projectTitleHeading = document.getElementById('project-title-heading')
+const taskList = document.getElementById('tasks-list')
 
 
 class Task {
@@ -41,7 +44,7 @@ let exampleProject = new Project('Example Project', '12-02-2022')
 let exampleProject2 = new Project("Example Project 2", "13-02-2022");
 exampleProject.addTask('do laundry')
 exampleProject.addTask('walk dog')
-
+exampleProject2.addTask('do homework')
 console.log(exampleProject.tasks)
 exampleProject.tasks.forEach(function (task) {
   console.log(task.title)
@@ -52,7 +55,7 @@ myProjects.push(exampleProject2)
 window.onload = displayProjects();
 
 function displayProjects() {
-  projectsList.innerHTML = "";
+  projectsList.textContent = "";
   myProjects.forEach(function (project, i) {
     let newProjectItem = document.createElement("li");
     newProjectItem.classList.add('project')
@@ -61,12 +64,27 @@ function displayProjects() {
     console.log(i)
     newProjectItem.textContent = project.title;
     projectsList.appendChild(newProjectItem);
-    
+    addProjectsToDashboard()
   })
-  availableProjects = document.querySelectorAll(".project");
-  console.log(availableProjects)
 }
 
+// was not in a function before
+function addProjectsToDashboard() {
+  availableProjects = document.querySelectorAll(".project");
+  console.log(availableProjects);
+  availableProjects.forEach((availableProject) => {
+    availableProject.addEventListener("click", (e) => {
+      console.log("in loop");
+      let ind = e.target.id;
+      console.log(availableProject);
+      console.log(ind);
+      selectedProject = myProjects[ind];
+      renderProject(selectedProject);
+      // displayProjects()
+      console.log("exit loop");
+    });
+  });
+}
 
 // EVENTS 
 // addProjectBtn.addEventListener()
@@ -78,19 +96,6 @@ createProjectBtn.addEventListener('click', () => {
   console.log(myProjects)
 })
 
-availableProjects.forEach((availableProject) => {
-  console.log("in loop");
-  availableProject.addEventListener("click", (e) => {
-    let ind = e.target.id;
-    console.log(availableProject);
-    console.log(ind);
-    selectedProject = myProjects[ind];
-    renderProject(selectedProject);
-    // displayProjects()
-    console.log('exit loop')
-  });
-  
-});
 
 function getProjectInput() {
   // console.log('in project function')
@@ -119,85 +124,22 @@ function addProject() {
   }
 }
 
-// GET CONSTANTS FROM DOM
-const upperPart = document.getElementById('upper-part')
-const projectTitleHeading = document.getElementById('project-title-heading')
-
-// let newProject2 = new Project('title of project', '12.03.2022')
-// console.log(newProject2.dueDate)
-// let randomItem = document.createElement("li");
-// projectsList.appendChild(randomItem);
-// randomItem.textContent = newProject2.title;
-let i = 0
-let selectedProject
-
-// availableProjects = (document.querySelectorAll('.project'))
-console.log(availableProjects)
-// console.log(availableProjects)
-// myProjects.forEach((myProject) => (
-  
-//   console.log(myProject.title))
-//   let id = document.getElementsByClassName('project')[i].id
-//   console.log(id)
-//   selectedProject = document.getElementById(id)
-//   console.log(selectedProject)
-//   // selectedProject = e.target.id
-//   renderProject(selectedProject)
-//   // myProject.addEventListener('click', (e) => {
-//   //   selectedProject = e.target.id
-//   //   console.log(e.target.id)
-//   // }))
-//   i++
-// )
-// availableProjects.forEach((availableProject) => {
-//   console.log('in loop')
-//   availableProject.addEventListener('click', (e) => {
-//     let ind = e.target.id;
-//     console.log(availableProject)
-//     console.log(ind)
-//     selectedProject = myProjects[ind]
-//     renderProject(selectedProject)
-//   })
-// })
-// myProjects.forEach((myProject) => {
-//   // console.log(myProject.title);
-//   let id = document.getElementsByClassName("project")[i].id;
-//   id = myProjects.indexOf(myProject)
-//   console.log(id);
-//   selectedProject = document.getElementById(id);
-//     // console.log(selectedProject)
-//     selectedProject.addEventListener('click', ()=> {
-//       // console.log(myProject.title);
-//       // let id = document.getElementsByClassName("project")[i].id;
-//       // id = myProjects.indexOf(myProject);
-//       // console.log(id);
-//       // selectedProject = document.getElementById(id);
-//       // let index = myProjects[i]
-//       console.log('clicked')
-//       console.log(myProjects)
-//       console.log(myProjects[id])
-//       renderProject(myProjects[id]);
-//     })
-//     // selectedProject = e.target.id
-    
-//     // myProject.addEventListener('click', (e) => {
-//     //   selectedProject = e.target.id
-//     //   console.log(e.target.id)
-//     // }))
-//     i++
-//     if (i == myProjects.length -1) {
-//       i = 0
-//     }
-
-// })
 
 function renderProject(p) {
   projectTitleHeading.textContent = ''
   // projectTitleHeading.textContent = p.title
   console.log(p.title)
   projectTitleHeading.textContent = p.title
+  console.log(p.tasks)
+  // for each task: display
+  currentTasks = p.tasks
+  taskList.textContent = ''
+  currentTasks.forEach((currentTask) => {
+    let taskItem = document.createElement('li')
+    taskItem.textContent = currentTask.title
+    taskItem.classList.add('task')
+    taskList.appendChild(taskItem)
+  })
 }
-// for (let item of myProjects) {
-//   console.log(item.title)
 
-// }
+
