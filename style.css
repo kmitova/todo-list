@@ -40,3 +40,7 @@ li {
 button {
   margin: 0 .5em;
 }
+
+.task-completed {
+  text-decoration: line-through;
+}
