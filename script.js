@@ -100,7 +100,15 @@ createProjectBtn.addEventListener('click', () => {
   displayProjects()
   console.log(myProjects)
 })
-
+let taskTitleAvailable = false
+let getTaskTitle
+const addTaskBtn = document.getElementById("add-new-task-form-btn");
+function getTaskInput() {
+  getTaskTitle = document.getElementById('task-title').value
+  if (getTaskTitle != '') {
+    taskTitleAvailable = true
+  }
+}
 
 function getProjectInput() {
   // console.log('in project function')
@@ -114,7 +122,23 @@ function getProjectInput() {
   // console.log(getProjectDueDate)
   // console.log(getProjectDescription)
 }
-
+function addTasktoProject() {
+  if (taskTitleAvailable) {
+    let projectNameNeeded = projectTitleHeading.textContent
+    for (let item of myProjects) {
+      console.log(item.title)
+      if (item.title === projectNameNeeded) {
+        console.log('such project exists')
+        item.addTask(getTaskTitle)
+        console.log(item)
+        renderProject(item)
+        break
+      }
+    }
+  } else {
+    alert('Please type a task')
+  }
+}
 function addProject() {
   // console.log('in add project function')
   if (projectInputAvailable) {
@@ -136,9 +160,9 @@ function renderProject(p) {
   console.log(p.title)
   projectTitleHeading.textContent = p.title
   projectDueDateDisplay.textContent = "Due: " + p.dueDate;
-  console.log(p.tasks)
   // for each task: display
   currentTasks = p.tasks
+  console.table(currentTasks)
   taskList.textContent = ''
   currentTasks.forEach((currentTask) => {
     let taskItem = document.createElement('li')
@@ -151,9 +175,14 @@ function renderProject(p) {
     taskItem.appendChild(deleteTaskBtn)
     taskItem.classList.add('task')
     taskList.appendChild(taskItem)
+    console.log('adding task')
   })
 }
 
 
 
+addTaskBtn.addEventListener("click", () => {
+  getTaskInput();
+  addTasktoProject();
+});
 
