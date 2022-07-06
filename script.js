@@ -10,12 +10,17 @@ const addProjectBtn = document.getElementById("add-project-btn");
 const createProjectBtn = document.getElementById("create-new-project");
 let newProject
 let availableProjects;
-
+let completeBtn
+let deleteTaskBtn
+let projectDueDateDisplay
 // GET CONSTANTS FROM DOM
 const upperPart = document.getElementById('upper-part')
 const projectTitleHeading = document.getElementById('project-title-heading')
 const taskList = document.getElementById('tasks-list')
 
+projectDueDateDisplay = document.createElement("h3");
+// projectDueDateDisplay.textContent = p.dueDate;
+upperPart.appendChild(projectDueDateDisplay);
 
 class Task {
   constructor(title) {
@@ -127,9 +132,10 @@ function addProject() {
 
 function renderProject(p) {
   projectTitleHeading.textContent = ''
-  // projectTitleHeading.textContent = p.title
+  projectDueDateDisplay.textContent = ''
   console.log(p.title)
   projectTitleHeading.textContent = p.title
+  projectDueDateDisplay.textContent = "Due: " + p.dueDate;
   console.log(p.tasks)
   // for each task: display
   currentTasks = p.tasks
@@ -137,9 +143,17 @@ function renderProject(p) {
   currentTasks.forEach((currentTask) => {
     let taskItem = document.createElement('li')
     taskItem.textContent = currentTask.title
+    completeBtn = document.createElement('button')
+    completeBtn.textContent = 'Complete'
+    taskItem.appendChild(completeBtn)
+    deleteTaskBtn = document.createElement('button')
+    deleteTaskBtn.textContent = 'Delete'
+    taskItem.appendChild(deleteTaskBtn)
     taskItem.classList.add('task')
     taskList.appendChild(taskItem)
   })
 }
+
+
 
 
