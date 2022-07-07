@@ -110,16 +110,11 @@ function getTaskInput() {
 }
 
 function getProjectInput() {
-  // console.log('in project function')
   getProjectTitle = document.getElementById("project-title").value;
-  // getProjectDescription = document.getElementById('project-description').value
   getProjectDueDate = document.getElementById("project-due-date").value;
   if (getProjectTitle != "" && getProjectDueDate != "") {
     projectInputAvailable = true;
   }
-  // console.log(getProjectTitle)
-  // console.log(getProjectDueDate)
-  // console.log(getProjectDescription)
 }
 function addTasktoProject() {
   if (taskTitleAvailable) {
@@ -162,8 +157,9 @@ function renderProject(p) {
   currentTasks = p.tasks;
   console.table(currentTasks);
   taskList.textContent = "";
+  let taskItem
   currentTasks.forEach((currentTask) => {
-    let taskItem = document.createElement("li");
+    taskItem = document.createElement("li");
     taskItem.textContent = currentTask.title;
     completeBtn = document.createElement("button");
     completeBtn.textContent = "Complete";
@@ -183,19 +179,44 @@ function renderProject(p) {
     }
   });
   completeTask(p);
+  deleteTask(p, taskItem)
 }
-
-// let compleTaskBtns = document.querySelectorAll('.complete-task-btn')
-// console.log(compleTaskBtns)
-// compleTaskBtns.forEach((completeTaskBtn) =>
-//   completeTaskBtn.addEventListener('click', ()=> {
-//     console.log('in complete loop')
-//   }))
 
 addTaskBtn.addEventListener("click", () => {
   getTaskInput();
   addTasktoProject();
 });
+
+function deleteTask(p) {
+  // similar to complete task function
+  let deleteTaskBtnsE = document.querySelectorAll('.delete-task-btn')
+  console.log(deleteTaskBtnsE)
+  deleteTaskBtnsE.forEach((deleteTaskBtnE) => 
+    deleteTaskBtnE.addEventListener('click', () => {
+      console.log('in delete task loop')
+      console.log(deleteTaskBtnE.previousElementSibling.textContent)
+      let previousBtn = deleteTaskBtnE.previousElementSibling
+      console.log(previousBtn.previousSibling.textContent)
+      let taskContent = previousBtn.previousSibling.textContent
+      for (let item of myProjects) {
+        if (item.title === p.title) {
+          console.log(p.title)
+          for (let el of item.tasks) {
+            if (el.title === taskContent) {
+              console.log(el.title)
+
+              let index = item.tasks.indexOf(el)
+              item.tasks.splice(index, 1)
+              console.log(item.tasks)
+              console.log(deleteTaskBtnE.parentNode)
+              deleteTaskBtnE.parentNode.classList.add('hide')
+            }
+          }
+        }
+      }
+    }))
+}
+
 function completeTask(p) {
   let compleTaskBtns = document.querySelectorAll(".complete-task-btn");
   console.log(compleTaskBtns);
@@ -225,19 +246,11 @@ function completeTask(p) {
   );
 }
 
-// function addProjectsToDashboard() {
-//   availableProjects = document.querySelectorAll(".project");
-//   console.log(availableProjects);
-//   availableProjects.forEach((availableProject) => {
-//     availableProject.addEventListener("click", (e) => {
-//       console.log("in loop");
-//       let ind = e.target.id;
-//       console.log(availableProject);
-//       console.log(ind);
-//       selectedProject = myProjects[ind];
-//       renderProject(selectedProject);
-//       // displayProjects()
-//       console.log("exit loop");
-//     });
-//   });
-// }
+
+
+// let compleTaskBtns = document.querySelectorAll('.complete-task-btn')
+// console.log(compleTaskBtns)
+// compleTaskBtns.forEach((completeTaskBtn) =>
+//   completeTaskBtn.addEventListener('click', ()=> {
+//     console.log('in complete loop')
+//   }))
