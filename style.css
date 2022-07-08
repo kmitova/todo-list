@@ -44,3 +44,12 @@ button {
 .task-completed {
   text-decoration: line-through;
 }
+
+.side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3em;
+  padding: 2em;
+}

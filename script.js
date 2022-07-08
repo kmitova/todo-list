@@ -128,8 +128,12 @@ function addProjectsToDashboard() {
 
 // EVENTS
 // addProjectBtn.addEventListener()
+const addProjectFormBtn = document.getElementById("add-project-btn-form");
+const addProjectForm = document.getElementById("add-project-form");
 
 createProjectBtn.addEventListener("click", () => {
+  addProjectFormBtn.classList.remove('hide')
+  addProjectForm.classList.add('hide')
   getProjectInput();
   addProject();
   displayProjects();
@@ -143,6 +147,7 @@ function getTaskInput() {
   if (getTaskTitle != "") {
     taskTitleAvailable = true;
   }
+
 }
 
 function getProjectInput() {
@@ -291,6 +296,12 @@ function completeTask(p) {
     })
   );
 }
+
+addProjectFormBtn.addEventListener('click', () => {
+  addProjectForm.classList.remove('hide')
+  addProjectFormBtn.classList.add('hide')
+})
+
 // let completeProjectBtns = document.querySelectorAll(".complete-project-btn");
 // console.log(completeProjectBtns);
 // completeProjectBtns.forEach((completeProjectBtnE) =>

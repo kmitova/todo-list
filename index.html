@@ -20,8 +20,9 @@
         </div>
         <div class="add-new-project">
           <!-- when the button is clicked, display form and hide button -->
-          <button id="add-project-btn">Add New Project</button>
-          <!-- <form action=""> -->
+          <button id="add-project-btn-form">Add New Project</button>
+          <div class="hide" id="add-project-form">
+            <!-- <form action="" class="hide"> -->
             <label for="">Title</label>
             <input type="text" id="project-title" />
             <!-- <label for="">Description</label>
@@ -29,41 +30,43 @@
             <label for="">Due Date</label>
             <input type="date" id="project-due-date" />
             <!-- when this button is clicked, create project (add to list, hide form and display add project button -->
-            
+            <div class="project-buttons">
+              <button id="create-new-project">Create Project</button>
             </div>
+          </div>
           <!-- </form> -->
-          <div class="project-buttons">
-              <button id="create-new-project">
-                Create Project
-              </button>
-              <button class="cancel">Cancel</button>
         </div>
       </div>
       <div id="content">
-        <p class="hide" id="completed-project-text">You've completed your project!</p>
+        <p class="hide" id="completed-project-text">
+          You've completed your project!
+        </p>
         <div class="project-info">
           <div id="upper-part">
-          <h2 id="project-title-heading">Project</h2>
-          <!-- <p>description of Example Project</p> -->
-          <!-- <button class="complete-project">Complete Project</button> -->
-        </div>
-        <div class="tasks-section">
-          <ul id="tasks-list">
-            <!-- <li class="task">task1 <button>Completed</button><button>Delete</button></li>
+            <h2 id="project-title-heading"></h2>
+            <!-- <p>description of Example Project</p> -->
+            <!-- <button class="complete-project">Complete Project</button> -->
+          </div>
+          <div class="tasks-section">
+            <ul id="tasks-list">
+              <!-- <li class="task">task1 <button>Completed</button><button>Delete</button></li>
             <li>task2<button>Completed</button><button>Delete</button></li>
             <li>task3<button>Completed</button><button>Delete</button></li>
             <li>task4<button>Completed</button><button>Delete</button></li> -->
-          </ul>
-          <button class="add-task">Add Task</button>
-          <!-- if button is clicked: hide it, and display form -->
-          <form action="">
-            <input type="text" placeholder="write task here" id="task-title"/>
-            <!-- if clicked, add task to project, hide form, display the add task button again -->
-          </form>
-          <button id="add-new-task-form-btn">Add</button>
+            </ul>
+            <!-- <button class="add-task">Add Task</button> -->
+            <!-- if button is clicked: hide it, and display form -->
+            <form action="">
+              <input
+                type="text"
+                placeholder="write task here"
+                id="task-title"
+              />
+              <!-- if clicked, add task to project, hide form, display the add task button again -->
+            </form>
+            <button id="add-new-task-form-btn">Add</button>
             <button class="cancel">Cancel</button>
-        </div>
-
+          </div>
         </div>
       </div>
     </main>
