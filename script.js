@@ -5,7 +5,6 @@ let getProjectDescription;
 let getProjectDueDate;
 const projectsContainer = document.getElementsByClassName("projects");
 const projectsList = document.getElementById("projects-list");
-// BUTTONS
 const addProjectBtn = document.getElementById("add-project-btn");
 const createProjectBtn = document.getElementById("create-new-project");
 let newProject;
@@ -18,13 +17,10 @@ let projectDueDateDisplay;
 const upperPart = document.getElementById("upper-part");
 const projectTitleHeading = document.getElementById("project-title-heading");
 const taskList = document.getElementById("tasks-list");
-// let completeProjectBtn = document.createElement("button");
-// upperPart.appendChild(completeProjectBtn);
 let mainProjectContent = document.getElementById("project-info");
 let completedProjectText = document.getElementById("completed-project-text");
 console.log(completedProjectText.textContent);
 projectDueDateDisplay = document.createElement("h3");
-// projectDueDateDisplay.textContent = p.dueDate;
 upperPart.appendChild(projectDueDateDisplay);
 
 class Task {
@@ -36,16 +32,13 @@ class Task {
 class Project {
   constructor(title, dueDate) {
     this.title = title;
-    // this.description = description
     this.dueDate = dueDate;
     this.tasks = [];
   }
 
   addTask(taskTitle) {
-    // let taskTitle
     let newTask = new Task(taskTitle);
     this.tasks.push(newTask);
-    // return
   }
 }
 
@@ -56,10 +49,6 @@ exampleProject.addTask("walk dog");
 exampleProject.addTask("cook dinner");
 exampleProject2.addTask("do homework");
 exampleProject2.addTask("grocery shopping");
-console.log(exampleProject.tasks);
-exampleProject.tasks.forEach(function (task) {
-  console.log(task.title);
-});
 myProjects.push(exampleProject);
 myProjects.push(exampleProject2);
 
@@ -72,19 +61,13 @@ function displayProjects() {
     let completeProjectBtn = document.createElement("button");
     completeProjectBtn.textContent = "Complete Project";
     completeProjectBtn.classList.add("complete-project-btn");
-
     newProjectItem.classList.add("project");
     newProjectItem.setAttribute("id", i);
-    // console.log(project.title);
-    console.log(i);
     newProjectItem.textContent = project.title;
     projectsList.appendChild(itemDiv);
     itemDiv.appendChild(newProjectItem);
     itemDiv.appendChild(completeProjectBtn);
     itemDiv.classList.add("item-div");
-    console.log(newProjectItem);
-    // completedProjectText.classList.add("hide");
-    // mainProjectContent.classList.remove("hide");
     addProjectsToDashboard();
     completeProject();
   });
@@ -97,11 +80,8 @@ function completeProject() {
   console.log(allCompleteProjectBtns);
   allCompleteProjectBtns.forEach((comp) =>
     comp.addEventListener("click", () => {
-      console.log("clicked");
-      console.log(comp.previousSibling.textContent);
       for (let item of myProjects) {
         if (item.title === comp.previousSibling.textContent) {
-          console.log("same name");
           comp.parentElement.classList.add("hide");
         }
       }
@@ -109,42 +89,31 @@ function completeProject() {
   );
 }
 
-// was not in a function before
 function addProjectsToDashboard() {
   availableProjects = document.querySelectorAll(".project");
   console.log(availableProjects);
   availableProjects.forEach((availableProject) => {
     availableProject.addEventListener("click", (e) => {
-      console.log("in loop");
       let ind = e.target.id;
-      console.log(availableProject);
-      console.log(ind);
-
       selectedProject = myProjects[ind];
       renderProject(selectedProject);
-      // completeProject(selectedProject)
-      // displayProjects()
 
-      console.log("exit loop");
     });
   });
 }
 
-// EVENTS
-// addProjectBtn.addEventListener()
 const addProjectFormBtn = document.getElementById("add-project-btn-form");
 const addProjectForm = document.getElementById("add-project-form");
 
 createProjectBtn.addEventListener("click", () => {
   addProjectFormBtn.classList.remove("hide");
-  console.log(addProjectFormBtn.classList);
   addProjectForm.classList.add("hide");
   addProjectFormBtn.classList.remove("lower-opacity");
   getProjectInput();
   addProject();
   displayProjects();
-  console.log(myProjects);
 });
+
 let taskTitleAvailable = false;
 let getTaskTitle;
 const addTaskBtn = document.getElementById("add-new-task-form-btn");
@@ -168,9 +137,7 @@ function addTasktoProject() {
     for (let item of myProjects) {
       console.log(item.title);
       if (item.title === projectNameNeeded) {
-        console.log("such project exists");
         item.addTask(getTaskTitle);
-        console.log(item);
         renderProject(item);
         break;
       }
@@ -180,10 +147,8 @@ function addTasktoProject() {
   }
 }
 function addProject() {
-  // console.log('in add project function')
   if (projectInputAvailable) {
     newProject = new Project(getProjectTitle, getProjectDueDate);
-    // console.log(newProject.title)
     document.getElementById("project-title").value = "";
     document.getElementById("project-due-date").value = "";
     myProjects.push(newProject);
@@ -194,24 +159,12 @@ function addProject() {
 }
 
 function renderProject(p) {
-  // completedProjectText.classList.add('hide')
-  // mainProjectContent.classList.remove('hide')
   projectTitleHeading.textContent = "";
   projectDueDateDisplay.textContent = "";
-  // console.log(p.title);
   projectTitleHeading.textContent = p.title;
   projectDueDateDisplay.textContent = "Due: " + p.dueDate;
   projectDueDateDisplay.classList.add("display-due-date");
-  // for each task: display
-
-  // let completeProjectBtn = document.createElement('button')
-  // completeProjectBtn.classList.add('complete-project-btn')
-  // completeProjectBtn.textContent = 'Complete Project'
-  // upperPart.append(completeProjectBtn)
-  // console.log('button added')
-  // upperPart.appendChild(completeProjectBtn)
   currentTasks = p.tasks;
-  // console.table(currentTasks);
   taskList.textContent = "";
   let taskItem;
   currentTasks.forEach((currentTask) => {
@@ -224,12 +177,9 @@ function renderProject(p) {
     deleteTaskBtn = document.createElement("button");
     deleteTaskBtn.classList.add("delete-task-btn");
     deleteTaskBtn.textContent = "Delete";
-    let taskButtons = document.createElement("div");
-    // taskButtons.classList.add
     taskItem.appendChild(deleteTaskBtn);
     taskItem.classList.add("task");
     taskList.appendChild(taskItem);
-    // console.log('adding task')
     if (currentTask.completed) {
       taskItem.classList.add("task-completed");
       deleteTaskBtn.classList.add("hide");
@@ -238,7 +188,6 @@ function renderProject(p) {
   });
   completeTask(p);
   deleteTask(p);
-  // completeProject(p)
 }
 
 addTaskBtn.addEventListener("click", () => {
@@ -247,26 +196,17 @@ addTaskBtn.addEventListener("click", () => {
 });
 
 function deleteTask(p) {
-  // similar to complete task function
   let deleteTaskBtnsE = document.querySelectorAll(".delete-task-btn");
-  console.log(deleteTaskBtnsE);
   deleteTaskBtnsE.forEach((deleteTaskBtnE) =>
     deleteTaskBtnE.addEventListener("click", () => {
-      console.log("in delete task loop");
-      console.log(deleteTaskBtnE.previousElementSibling.textContent);
       let previousBtn = deleteTaskBtnE.previousElementSibling;
-      console.log(previousBtn.previousSibling.textContent);
       let taskContent = previousBtn.previousSibling.textContent;
       for (let item of myProjects) {
         if (item.title === p.title) {
-          console.log(p.title);
           for (let el of item.tasks) {
             if (el.title === taskContent) {
-              console.log(el.title);
               let index = item.tasks.indexOf(el);
               item.tasks.splice(index, 1);
-              console.log(item.tasks);
-              console.log(deleteTaskBtnE.parentNode);
               deleteTaskBtnE.parentNode.classList.add("hide");
               renderProject(p);
             }
@@ -279,22 +219,14 @@ function deleteTask(p) {
 
 function completeTask(p) {
   let compleTaskBtns = document.querySelectorAll(".complete-task-btn");
-  console.log(compleTaskBtns);
   compleTaskBtns.forEach((completeTaskBtn) =>
     completeTaskBtn.addEventListener("click", () => {
-      console.log("in complete loop");
-      console.log(completeTaskBtn.previousSibling.textContent);
       let taskContent = completeTaskBtn.previousSibling.textContent;
-      console.log(taskContent);
       for (let item of myProjects) {
         if (item.title === p.title) {
-          console.log(p.title);
-          console.log(item.tasks);
           for (let el of item.tasks) {
             if (el.title === taskContent) {
               el.completed = true;
-              console.log("task completed");
-              console.log(completeTaskBtn.parentNode);
               completeTaskBtn.parentNode.classList.add("task-completed");
               completeTaskBtn.nextSibling.classList.add("hide");
               completeTaskBtn.classList.add("hide");
@@ -307,59 +239,8 @@ function completeTask(p) {
 }
 
 addProjectFormBtn.addEventListener("click", () => {
-  console.log("in project form");
   addProjectFormBtn.classList.add("hide");
   addProjectFormBtn.classList.add("lower-opacity");
   addProjectForm.classList.remove("hide");
 });
 
-// let completeProjectBtns = document.querySelectorAll(".complete-project-btn");
-// console.log(completeProjectBtns);
-// completeProjectBtns.forEach((completeProjectBtnE) =>
-//   completeProjectBtnE.addEventListener("click", () => {
-//     console.log("clicked");
-//     let neededTitle = projectTitleHeading.textContent;
-//     console.log(neededTitle);
-//     for (let item of myProjects) {
-//       console.log(item);
-//       if (item.title === neededTitle) {
-//         console.log("title is the same: " + p.title);
-//         let index = myProjects.indexOf(item);
-//         console.log(item);
-//         myProjects.splice(index, 1);
-//         console.log(myProjects);
-//         completedProjectText.classList.remove("hide");
-//         // mainProjectContent.classList.add('hide')
-//         break;
-//         // mainProjectContent.classList.add('hide')
-//       }
-//     }
-//     displayProjects()
-//   })
-// );
-// function completeProject(p) {
-//   let completeProjectBtns = document.querySelectorAll(".complete-project-btn");
-//   console.log(completeProjectBtns)
-//   completeProjectBtns.forEach((completeProjectBtnE) =>
-//   completeProjectBtnE.addEventListener('click', ()=> {
-//     console.log('clicked')
-//     let neededTitle = projectTitleHeading.textContent
-//     console.log(neededTitle)
-//     for (let item of myProjects) {
-//       console.log(item)
-//       if (item.title === neededTitle) {
-//         console.log('title is the same: ' + p.title)
-//         let index = myProjects.indexOf(item)
-//         console.log(item)
-//         myProjects.splice(index, 1)
-//         console.log(myProjects)
-//         completedProjectText.classList.remove('hide')
-//         // mainProjectContent.classList.add('hide')
-//         break
-//         // mainProjectContent.classList.add('hide')
-
-//       }
-
-//     }
-//   }))
-// }
