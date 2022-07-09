@@ -133,7 +133,9 @@ const addProjectForm = document.getElementById("add-project-form");
 
 createProjectBtn.addEventListener("click", () => {
   addProjectFormBtn.classList.remove('hide')
+  console.log(addProjectFormBtn.classList)
   addProjectForm.classList.add('hide')
+  addProjectFormBtn.classList.remove("lower-opacity");
   getProjectInput();
   addProject();
   displayProjects();
@@ -196,6 +198,7 @@ function renderProject(p) {
   // console.log(p.title);
   projectTitleHeading.textContent = p.title;
   projectDueDateDisplay.textContent = "Due: " + p.dueDate;
+  projectDueDateDisplay.classList.add('display-due-date')
   // for each task: display
   
   // let completeProjectBtn = document.createElement('button')
@@ -218,6 +221,8 @@ function renderProject(p) {
     deleteTaskBtn = document.createElement("button");
     deleteTaskBtn.classList.add("delete-task-btn");
     deleteTaskBtn.textContent = "Delete";
+    let taskButtons = document.createElement('div')
+    // taskButtons.classList.add
     taskItem.appendChild(deleteTaskBtn);
     taskItem.classList.add("task");
     taskList.appendChild(taskItem);
@@ -298,8 +303,11 @@ function completeTask(p) {
 }
 
 addProjectFormBtn.addEventListener('click', () => {
-  addProjectForm.classList.remove('hide')
+  console.log('in project form')
   addProjectFormBtn.classList.add('hide')
+  addProjectFormBtn.classList.add('lower-opacity')
+  addProjectForm.classList.remove('hide')
+  
 })
 
 // let completeProjectBtns = document.querySelectorAll(".complete-project-btn");
