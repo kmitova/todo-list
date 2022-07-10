@@ -17,7 +17,6 @@ const projectTitleHeading = document.getElementById("project-title-heading");
 const taskList = document.getElementById("tasks-list");
 let mainProjectContent = document.getElementById("project-info");
 let completedProjectText = document.getElementById("completed-project-text");
-console.log(completedProjectText.textContent);
 projectDueDateDisplay = document.createElement("h3");
 upperPart.appendChild(projectDueDateDisplay);
 
@@ -51,6 +50,7 @@ myProjects.push(exampleProject);
 myProjects.push(exampleProject2);
 
 window.onload = displayProjects();
+
 function displayProjects() {
   projectsList.textContent = "";
   myProjects.forEach(function (project, i) {
@@ -75,7 +75,6 @@ function completeProject() {
   let allCompleteProjectBtns = document.querySelectorAll(
     ".complete-project-btn"
   );
-  console.log(allCompleteProjectBtns);
   allCompleteProjectBtns.forEach((comp) =>
     comp.addEventListener("click", () => {
       for (let item of myProjects) {
@@ -89,7 +88,6 @@ function completeProject() {
 
 function addProjectsToDashboard() {
   availableProjects = document.querySelectorAll(".project");
-  console.log(availableProjects);
   availableProjects.forEach((availableProject) => {
     availableProject.addEventListener("click", (e) => {
       let ind = e.target.id;
@@ -134,7 +132,6 @@ function addTasktoProject() {
   if (taskTitleAvailable) {
     let projectNameNeeded = projectTitleHeading.textContent;
     for (let item of myProjects) {
-      console.log(item.title);
       if (item.title === projectNameNeeded) {
         item.addTask(getTaskTitle);
         renderProject(item);
@@ -144,6 +141,7 @@ function addTasktoProject() {
   } else {
     alert("Please type a task");
   }
+  getTaskTitle = document.getElementById("task-title").value = ''
 }
 
 function addProject() {
@@ -152,13 +150,13 @@ function addProject() {
     document.getElementById("project-title").value = "";
     document.getElementById("project-due-date").value = "";
     myProjects.push(newProject);
-    console.log(myProjects.indexOf(newProject));
   } else {
     alert("Please fill in all project fields");
   }
 }
 
 function renderProject(p) {
+
   projectTitleHeading.textContent = "";
   projectDueDateDisplay.textContent = "";
   projectTitleHeading.textContent = p.title;
