@@ -12,8 +12,6 @@ let availableProjects;
 let completeBtn;
 let deleteTaskBtn;
 let projectDueDateDisplay;
-
-// GET CONSTANTS FROM DOM
 const upperPart = document.getElementById("upper-part");
 const projectTitleHeading = document.getElementById("project-title-heading");
 const taskList = document.getElementById("tasks-list");
@@ -131,6 +129,7 @@ function getProjectInput() {
     projectInputAvailable = true;
   }
 }
+
 function addTasktoProject() {
   if (taskTitleAvailable) {
     let projectNameNeeded = projectTitleHeading.textContent;
@@ -146,6 +145,7 @@ function addTasktoProject() {
     alert("Please type a task");
   }
 }
+
 function addProject() {
   if (projectInputAvailable) {
     newProject = new Project(getProjectTitle, getProjectDueDate);
